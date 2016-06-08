@@ -16,4 +16,5 @@ FOUNDATION_EXPORT const unsigned char BlueChatLibVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <BlueChatLib/PublicHeader.h>
 
-
+#import <BlueChatLib/BCConstants.h>
+#import <BlueChatLib/BCFriendsManager.h>
