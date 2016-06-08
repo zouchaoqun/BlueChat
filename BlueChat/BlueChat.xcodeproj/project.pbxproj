@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		147611801D0848D10030307C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476117F1D0848D10030307C /* main.m */; };
+		147611831D0848D10030307C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611821D0848D10030307C /* AppDelegate.m */; };
+		147611861D0848D10030307C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611851D0848D10030307C /* ViewController.m */; };
+		147611891D0848D10030307C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147611871D0848D10030307C /* Main.storyboard */; };
+		1476118B1D0848D10030307C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1476118A1D0848D10030307C /* Assets.xcassets */; };
+		1476118E1D0848D10030307C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1476118C1D0848D10030307C /* LaunchScreen.storyboard */; };
+		147611991D0848D10030307C /* BlueChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611981D0848D10030307C /* BlueChatTests.m */; };
+		147611A41D0848D10030307C /* BlueChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611A31D0848D10030307C /* BlueChatUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		147611951D0848D10030307C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 147611731D0848D10030307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1476117A1D0848D10030307C;
+			remoteInfo = BlueChat;
+		};
+		147611A01D0848D10030307C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 147611731D0848D10030307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1476117A1D0848D10030307C;
+			remoteInfo = BlueChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1476117B1D0848D10030307C /* BlueChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1476117F1D0848D10030307C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		147611811D0848D10030307C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		147611821D0848D10030307C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		147611841D0848D10030307C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		147611851D0848D10030307C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		147611881D0848D10030307C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1476118A1D0848D10030307C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1476118D1D0848D10030307C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1476118F1D0848D10030307C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		147611941D0848D10030307C /* BlueChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		147611981D0848D10030307C /* BlueChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlueChatTests.m; sourceTree = "<group>"; };
+		1476119A1D0848D10030307C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1476119F1D0848D10030307C /* BlueChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		147611A31D0848D10030307C /* BlueChatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlueChatUITests.m; sourceTree = "<group>"; };
+		147611A51D0848D10030307C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		147611781D0848D10030307C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		147611911D0848D10030307C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1476119C1D0848D10030307C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		147611721D0848D10030307C = {
+			isa = PBXGroup;
+			children = (
+				1476117D1D0848D10030307C /* BlueChat */,
+				147611971D0848D10030307C /* BlueChatTests */,
+				147611A21D0848D10030307C /* BlueChatUITests */,
+				1476117C1D0848D10030307C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1476117C1D0848D10030307C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1476117B1D0848D10030307C /* BlueChat.app */,
+				147611941D0848D10030307C /* BlueChatTests.xctest */,
+				1476119F1D0848D10030307C /* BlueChatUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1476117D1D0848D10030307C /* BlueChat */ = {
+			isa = PBXGroup;
+			children = (
+				147611811D0848D10030307C /* AppDelegate.h */,
+				147611821D0848D10030307C /* AppDelegate.m */,
+				147611841D0848D10030307C /* ViewController.h */,
+				147611851D0848D10030307C /* ViewController.m */,
+				147611871D0848D10030307C /* Main.storyboard */,
+				1476118A1D0848D10030307C /* Assets.xcassets */,
+				1476118C1D0848D10030307C /* LaunchScreen.storyboard */,
+				1476118F1D0848D10030307C /* Info.plist */,
+				1476117E1D0848D10030307C /* Supporting Files */,
+			);
+			path = BlueChat;
+			sourceTree = "<group>";
+		};
+		1476117E1D0848D10030307C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1476117F1D0848D10030307C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		147611971D0848D10030307C /* BlueChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				147611981D0848D10030307C /* BlueChatTests.m */,
+				1476119A1D0848D10030307C /* Info.plist */,
+			);
+			path = BlueChatTests;
+			sourceTree = "<group>";
+		};
+		147611A21D0848D10030307C /* BlueChatUITests */ = {
+			isa = PBXGroup;
+			children = (
+				147611A31D0848D10030307C /* BlueChatUITests.m */,
+				147611A51D0848D10030307C /* Info.plist */,
+			);
+			path = BlueChatUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1476117A1D0848D10030307C /* BlueChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 147611A81D0848D10030307C /* Build configuration list for PBXNativeTarget "BlueChat" */;
+			buildPhases = (
+				147611771D0848D10030307C /* Sources */,
+				147611781D0848D10030307C /* Frameworks */,
+				147611791D0848D10030307C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlueChat;
+			productName = BlueChat;
+			productReference = 1476117B1D0848D10030307C /* BlueChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		147611931D0848D10030307C /* BlueChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 147611AB1D0848D10030307C /* Build configuration list for PBXNativeTarget "BlueChatTests" */;
+			buildPhases = (
+				147611901D0848D10030307C /* Sources */,
+				147611911D0848D10030307C /* Frameworks */,
+				147611921D0848D10030307C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				147611961D0848D10030307C /* PBXTargetDependency */,
+			);
+			name = BlueChatTests;
+			productName = BlueChatTests;
+			productReference = 147611941D0848D10030307C /* BlueChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1476119E1D0848D10030307C /* BlueChatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 147611AE1D0848D10030307C /* Build configuration list for PBXNativeTarget "BlueChatUITests" */;
+			buildPhases = (
+				1476119B1D0848D10030307C /* Sources */,
+				1476119C1D0848D10030307C /* Frameworks */,
+				1476119D1D0848D10030307C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				147611A11D0848D10030307C /* PBXTargetDependency */,
+			);
+			name = BlueChatUITests;
+			productName = BlueChatUITests;
+			productReference = 1476119F1D0848D10030307C /* BlueChatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		147611731D0848D10030307C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Max Zou";
+				TargetAttributes = {
+					1476117A1D0848D10030307C = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					147611931D0848D10030307C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 1476117A1D0848D10030307C;
+					};
+					1476119E1D0848D10030307C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 1476117A1D0848D10030307C;
+					};
+				};
+			};
+			buildConfigurationList = 147611761D0848D10030307C /* Build configuration list for PBXProject "BlueChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 147611721D0848D10030307C;
+			productRefGroup = 1476117C1D0848D10030307C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1476117A1D0848D10030307C /* BlueChat */,
+				147611931D0848D10030307C /* BlueChatTests */,
+				1476119E1D0848D10030307C /* BlueChatUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		147611791D0848D10030307C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1476118E1D0848D10030307C /* LaunchScreen.storyboard in Resources */,
+				1476118B1D0848D10030307C /* Assets.xcassets in Resources */,
+				147611891D0848D10030307C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		147611921D0848D10030307C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1476119D1D0848D10030307C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		147611771D0848D10030307C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				147611861D0848D10030307C /* ViewController.m in Sources */,
+				147611831D0848D10030307C /* AppDelegate.m in Sources */,
+				147611801D0848D10030307C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		147611901D0848D10030307C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				147611991D0848D10030307C /* BlueChatTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1476119B1D0848D10030307C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				147611A41D0848D10030307C /* BlueChatUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		147611961D0848D10030307C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1476117A1D0848D10030307C /* BlueChat */;
+			targetProxy = 147611951D0848D10030307C /* PBXContainerItemProxy */;
+		};
+		147611A11D0848D10030307C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1476117A1D0848D10030307C /* BlueChat */;
+			targetProxy = 147611A01D0848D10030307C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		147611871D0848D10030307C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				147611881D0848D10030307C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1476118C1D0848D10030307C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1476118D1D0848D10030307C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		147611A61D0848D10030307C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		147611A71D0848D10030307C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		147611A91D0848D10030307C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BlueChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.solarjoke.BlueChat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		147611AA1D0848D10030307C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BlueChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.solarjoke.BlueChat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		147611AC1D0848D10030307C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BlueChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.solarjoke.BlueChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueChat.app/BlueChat";
+			};
+			name = Debug;
+		};
+		147611AD1D0848D10030307C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BlueChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.solarjoke.BlueChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueChat.app/BlueChat";
+			};
+			name = Release;
+		};
+		147611AF1D0848D10030307C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BlueChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.solarjoke.BlueChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BlueChat;
+			};
+			name = Debug;
+		};
+		147611B01D0848D10030307C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BlueChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.solarjoke.BlueChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BlueChat;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		147611761D0848D10030307C /* Build configuration list for PBXProject "BlueChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				147611A61D0848D10030307C /* Debug */,
+				147611A71D0848D10030307C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		147611A81D0848D10030307C /* Build configuration list for PBXNativeTarget "BlueChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				147611A91D0848D10030307C /* Debug */,
+				147611AA1D0848D10030307C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		147611AB1D0848D10030307C /* Build configuration list for PBXNativeTarget "BlueChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				147611AC1D0848D10030307C /* Debug */,
+				147611AD1D0848D10030307C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		147611AE1D0848D10030307C /* Build configuration list for PBXNativeTarget "BlueChatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				147611AF1D0848D10030307C /* Debug */,
+				147611B01D0848D10030307C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 147611731D0848D10030307C /* Project object */;
+}
