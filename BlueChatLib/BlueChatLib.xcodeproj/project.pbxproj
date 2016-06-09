@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1413E9EB1D085721008350D4 /* BCFriendsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1413E9E91D085721008350D4 /* BCFriendsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1413E9EC1D085721008350D4 /* BCFriendsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1413E9EA1D085721008350D4 /* BCFriendsManager.m */; };
+		1413E9EB1D085721008350D4 /* BCChatServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1413E9E91D085721008350D4 /* BCChatServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1413E9EC1D085721008350D4 /* BCChatServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1413E9EA1D085721008350D4 /* BCChatServer.m */; };
 		1413E9F51D0857DF008350D4 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1413E9F41D0857DF008350D4 /* CoreBluetooth.framework */; };
 		1413E9FB1D085EE7008350D4 /* BCConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 1413E9FA1D085EE7008350D4 /* BCConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1413E9FD1D085F00008350D4 /* BCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1413E9FC1D085F00008350D4 /* BCConstants.m */; };
@@ -28,8 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1413E9E91D085721008350D4 /* BCFriendsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCFriendsManager.h; sourceTree = "<group>"; };
-		1413E9EA1D085721008350D4 /* BCFriendsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCFriendsManager.m; sourceTree = "<group>"; };
+		1413E9E91D085721008350D4 /* BCChatServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCChatServer.h; sourceTree = "<group>"; };
+		1413E9EA1D085721008350D4 /* BCChatServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCChatServer.m; sourceTree = "<group>"; };
 		1413E9F41D0857DF008350D4 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		1413E9FA1D085EE7008350D4 /* BCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCConstants.h; sourceTree = "<group>"; };
 		1413E9FC1D085F00008350D4 /* BCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCConstants.m; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 			children = (
 				147611EB1D08491D0030307C /* BlueChatLib.h */,
 				147611ED1D08491D0030307C /* Info.plist */,
-				1413E9E91D085721008350D4 /* BCFriendsManager.h */,
-				1413E9EA1D085721008350D4 /* BCFriendsManager.m */,
+				1413E9E91D085721008350D4 /* BCChatServer.h */,
+				1413E9EA1D085721008350D4 /* BCChatServer.m */,
 				1413E9FA1D085EE7008350D4 /* BCConstants.h */,
 				1413E9FC1D085F00008350D4 /* BCConstants.m */,
 			);
@@ -118,7 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				147611EC1D08491D0030307C /* BlueChatLib.h in Headers */,
-				1413E9EB1D085721008350D4 /* BCFriendsManager.h in Headers */,
+				1413E9EB1D085721008350D4 /* BCChatServer.h in Headers */,
 				1413E9FB1D085EE7008350D4 /* BCConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1413E9FD1D085F00008350D4 /* BCConstants.m in Sources */,
-				1413E9EC1D085721008350D4 /* BCFriendsManager.m in Sources */,
+				1413E9EC1D085721008350D4 /* BCChatServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

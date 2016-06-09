@@ -99,6 +99,7 @@
 		1413E9ED1D085787008350D4 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				1413E9F71D085E63008350D4 /* BlueChatLib.framework */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -106,7 +107,6 @@
 		147611721D0848D10030307C = {
 			isa = PBXGroup;
 			children = (
-				1413E9F71D085E63008350D4 /* BlueChatLib.framework */,
 				1476117D1D0848D10030307C /* BlueChat */,
 				1413E9ED1D085787008350D4 /* Framework */,
 				147611971D0848D10030307C /* BlueChatTests */,
