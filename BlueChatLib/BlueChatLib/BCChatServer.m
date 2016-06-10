@@ -8,6 +8,7 @@
 
 #import "BCChatServer.h"
 #import "BCConstants.h"
+#import "BCMessageManager.h"
 
 @interface BCChatServer () <CBPeripheralManagerDelegate>
 
@@ -21,7 +22,9 @@
 
 @property (copy, nonatomic) NSString *serverName;
 
-@property (weak, nonatomic) id<BCChatServerDelegate> delegate;
+@property (weak, nonatomic) id<BCChatServerDelegate> chatServerDelegate;
+
+@property (weak, nonatomic) id<BCChatManagerDelegate> chatManagerDelegate;
 
 @end
 
@@ -37,9 +40,11 @@
     return sharedInstance;
 }
 
-- (void)startChatServerWithName:(NSString *)name delegate:(id<BCChatServerDelegate> _Nonnull)delegate {
+- (void)startChatServerWithName:(NSString *)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate {
     
-    self.delegate = delegate;
+    self.chatServerDelegate = chatServerDelegate;
+    self.chatManagerDelegate = chatManagerDelegate;
+    
     if (name.length <= BCConstantMaximumNameLength) {
         self.serverName = name;
     }
@@ -55,14 +60,21 @@
     [self.peripheralManager stopAdvertising];
 }
 
+#pragma mark - BCChatManagerInterface
+- (void)sendMessage:(NSString *)message {
+    
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    BOOL sent = [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralCharacteristic onSubscribedCentrals:nil];
+}
+
 #pragma mark - Helpers
 - (void)setupServiceCharacteristics {
     
     self.chatService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BCChatServiceUUID] primary:YES];
     
-    self.centralToPeripheralCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BCChatCentralToPeripheralCharacteristicUUID] properties:CBCharacteristicPropertyWrite value:nil permissions:0];
+    self.centralToPeripheralCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BCChatCentralToPeripheralCharacteristicUUID] properties:CBCharacteristicPropertyWrite value:nil permissions:CBAttributePermissionsWriteable];
 
-    self.peripheralToCentralCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BCChatPeripheralToCentralCharacteristicUUID] properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyIndicate value:nil permissions:0];
+    self.peripheralToCentralCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BCChatPeripheralToCentralCharacteristicUUID] properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyIndicate value:nil permissions:CBAttributePermissionsReadable];
 
     self.chatService.characteristics = @[self.centralToPeripheralCharacteristic, self.peripheralToCentralCharacteristic];
     
@@ -71,7 +83,7 @@
 
 - (void)reportStartFailedWithReason:(NSString *)reason {
     
-    [self.delegate chatServerDidFailToStart:reason];
+    [self.chatServerDelegate chatServerDidFailToStart:reason];
 }
 
 #pragma mark - CBPeripheralManagerDelegate
@@ -118,7 +130,47 @@
         [self reportStartFailedWithReason:message];
     }
     else {
-        [self.delegate chatServerDidStart];
+        [self.chatServerDelegate chatServerDidStart];
+    }
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray<CBATTRequest *> *)requests {
+    
+    BOOL hasResponded = NO;
+    BOOL hasGotValidMessage = NO;
+
+    for (CBATTRequest *request in requests) {
+        
+        if (!hasResponded) {
+            hasResponded = YES;
+            [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        }
+
+        if (request.value) {
+            NSString *message = [[NSString alloc] initWithData:request.value encoding:NSUTF8StringEncoding];
+            if (message) {
+                [[BCMessageManager sharedManager] addMessage:@"" direction:BCMessageDirectionIncoming];
+                hasGotValidMessage = YES;
+            }
+        }
+    }
+    
+    if (hasGotValidMessage) {
+        [self.chatManagerDelegate newMessageDidCome];
+    }
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
+    
+    if (characteristic == self.peripheralToCentralCharacteristic) {
+        [self.chatServerDelegate chatClientDidCome];
+    }
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
+    
+    if (characteristic == self.peripheralToCentralCharacteristic) {
+        [self.chatManagerDelegate chatRoomDidClose];
     }
 }
 

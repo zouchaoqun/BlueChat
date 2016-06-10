@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		1413E9F81D085E63008350D4 /* BlueChatLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1413E9F71D085E63008350D4 /* BlueChatLib.framework */; };
 		1413E9F91D085E63008350D4 /* BlueChatLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1413E9F71D085E63008350D4 /* BlueChatLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1438D0281D0AEE2800321A02 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438D0271D0AEE2800321A02 /* ChatViewController.m */; };
 		147611801D0848D10030307C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476117F1D0848D10030307C /* main.m */; };
 		147611831D0848D10030307C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611821D0848D10030307C /* AppDelegate.m */; };
-		147611861D0848D10030307C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611851D0848D10030307C /* ViewController.m */; };
+		147611861D0848D10030307C /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611851D0848D10030307C /* FriendsViewController.m */; };
 		147611891D0848D10030307C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147611871D0848D10030307C /* Main.storyboard */; };
 		1476118B1D0848D10030307C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1476118A1D0848D10030307C /* Assets.xcassets */; };
 		1476118E1D0848D10030307C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1476118C1D0848D10030307C /* LaunchScreen.storyboard */; };
@@ -52,12 +53,14 @@
 
 /* Begin PBXFileReference section */
 		1413E9F71D085E63008350D4 /* BlueChatLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = BlueChatLib.framework; path = "/Users/maxzou/Library/Developer/Xcode/DerivedData/BlueChat-fteywjrzuagguccldtrakctqxvhb/Build/Products/Debug-iphoneos/BlueChatLib.framework"; sourceTree = "<absolute>"; };
+		1438D0261D0AEE2800321A02 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		1438D0271D0AEE2800321A02 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		1476117B1D0848D10030307C /* BlueChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1476117F1D0848D10030307C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		147611811D0848D10030307C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		147611821D0848D10030307C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		147611841D0848D10030307C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		147611851D0848D10030307C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		147611841D0848D10030307C /* FriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
+		147611851D0848D10030307C /* FriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		147611881D0848D10030307C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1476118A1D0848D10030307C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1476118D1D0848D10030307C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -130,8 +133,10 @@
 			children = (
 				147611811D0848D10030307C /* AppDelegate.h */,
 				147611821D0848D10030307C /* AppDelegate.m */,
-				147611841D0848D10030307C /* ViewController.h */,
-				147611851D0848D10030307C /* ViewController.m */,
+				147611841D0848D10030307C /* FriendsViewController.h */,
+				147611851D0848D10030307C /* FriendsViewController.m */,
+				1438D0261D0AEE2800321A02 /* ChatViewController.h */,
+				1438D0271D0AEE2800321A02 /* ChatViewController.m */,
 				147611871D0848D10030307C /* Main.storyboard */,
 				1476118A1D0848D10030307C /* Assets.xcassets */,
 				1476118C1D0848D10030307C /* LaunchScreen.storyboard */,
@@ -298,8 +303,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				147611861D0848D10030307C /* ViewController.m in Sources */,
+				147611861D0848D10030307C /* FriendsViewController.m in Sources */,
 				147611831D0848D10030307C /* AppDelegate.m in Sources */,
+				1438D0281D0AEE2800321A02 /* ChatViewController.m in Sources */,
 				147611801D0848D10030307C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BlueChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -455,6 +462,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BlueChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

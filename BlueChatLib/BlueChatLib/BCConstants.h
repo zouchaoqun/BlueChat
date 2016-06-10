@@ -32,6 +32,10 @@ extern NSString *const BCChatCentralToPeripheralCharacteristicUUID;
  */
 extern NSString *const BCChatPeripheralToCentralCharacteristicUUID;
 
+/**
+ *  UUID of the Characteristic for peripheral to tell the central to disconnect. Indicate and Read.
+ */
+extern NSString *const BCChatPeripheralToCentralDisconnectRequestCharacteristicUUID;
 
 
 #endif /* BCConstants_h */
