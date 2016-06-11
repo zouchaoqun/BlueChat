@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) CBMutableCharacteristic *peripheralToCentralCharacteristic;
 
+@property (strong, nonatomic) CBMutableCharacteristic *peripheralToCentralDisconnectRequestCharacteristic;
+
 @property (copy, nonatomic) NSString *serverName;
 
 @property (weak, nonatomic) id<BCChatServerDelegate> chatServerDelegate;
@@ -61,10 +63,16 @@
 }
 
 #pragma mark - BCChatManagerInterface
-- (void)sendMessage:(NSString *)message {
+- (void)sendMessage:(BCMessage *)bcMessage {
     
-    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
-    BOOL sent = [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralCharacteristic onSubscribedCentrals:nil];
+    NSData *data = [bcMessage.message dataUsingEncoding:NSUTF8StringEncoding];
+    bcMessage.hasBeenSent = [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralCharacteristic onSubscribedCentrals:nil];
+}
+
+- (void)leaveChatroom {
+    Byte bytes[1] = {0x01};
+    NSData *data = [NSData dataWithBytes:bytes length:1];
+    [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralDisconnectRequestCharacteristic onSubscribedCentrals:nil];
 }
 
 #pragma mark - Helpers
@@ -76,7 +84,9 @@
 
     self.peripheralToCentralCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BCChatPeripheralToCentralCharacteristicUUID] properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyIndicate value:nil permissions:CBAttributePermissionsReadable];
 
-    self.chatService.characteristics = @[self.centralToPeripheralCharacteristic, self.peripheralToCentralCharacteristic];
+    self.peripheralToCentralDisconnectRequestCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BCChatPeripheralToCentralDisconnectRequestCharacteristicUUID] properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyIndicate value:nil permissions:CBAttributePermissionsReadable];
+    
+    self.chatService.characteristics = @[self.centralToPeripheralCharacteristic, self.peripheralToCentralCharacteristic, self.peripheralToCentralDisconnectRequestCharacteristic];
     
     [self.peripheralManager addService:self.chatService];
 }
@@ -149,7 +159,7 @@
         if (request.value) {
             NSString *message = [[NSString alloc] initWithData:request.value encoding:NSUTF8StringEncoding];
             if (message) {
-                [[BCMessageManager sharedManager] addMessage:@"" direction:BCMessageDirectionIncoming];
+                [[BCMessageManager sharedManager] addMessage:message direction:BCMessageDirectionIncoming];
                 hasGotValidMessage = YES;
             }
         }

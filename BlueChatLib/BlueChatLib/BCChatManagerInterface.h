@@ -9,6 +9,7 @@
 #ifndef BCChatManagerInterface_h
 #define BCChatManagerInterface_h
 
+#import "BCMessage.h"
 
 @protocol BCChatManagerDelegate <NSObject>
 
@@ -21,7 +22,7 @@
 
 @protocol BCChatManagerInterface <NSObject>
 
-- (void)sendMessage:(NSString * _Nonnull)message;
+- (void)sendMessage:(BCMessage * _Nonnull)bcMessage;
 
 - (void)leaveChatroom;
 

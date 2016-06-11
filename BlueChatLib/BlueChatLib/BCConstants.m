@@ -14,3 +14,5 @@ NSString *const BCChatServiceUUID = @"920D5470-95D8-4289-8BF3-504058B0BCB1";
 NSString *const BCChatCentralToPeripheralCharacteristicUUID = @"920D5471-95D8-4289-8BF3-504058B0BCB1";
 
 NSString *const BCChatPeripheralToCentralCharacteristicUUID = @"920D5472-95D8-4289-8BF3-504058B0BCB1";
+
+NSString *const BCChatPeripheralToCentralDisconnectRequestCharacteristicUUID  = @"920D5473-95D8-4289-8BF3-504058B0BCB1";

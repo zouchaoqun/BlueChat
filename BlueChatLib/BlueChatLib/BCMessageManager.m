@@ -28,11 +28,16 @@
     return sharedManager;
 }
 
-- (void)addMessage:(NSString *)message direction:(BCMessageDirection)direction {
+- (BCMessage *)addMessage:(NSString *)message direction:(BCMessageDirection)direction {
     
     BCMessage *bcMessage = [[BCMessage alloc] initWithMessage:message direction:direction];
+    if (!bcMessage) {
+        return nil;
+    }
+    
     @synchronized (self) {
         [self.messageArray addObject:bcMessage];
+        return bcMessage;
     }
 }
 

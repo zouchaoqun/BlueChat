@@ -13,7 +13,7 @@
 
 + (nullable instancetype)sharedManager;
 
-- (void)addMessage:(NSString * _Nonnull)message direction:(BCMessageDirection)direction;
+- (BCMessage * _Nullable)addMessage:(NSString * _Nonnull)message direction:(BCMessageDirection)direction;
 
 - (void)removeAllMessages;
 
