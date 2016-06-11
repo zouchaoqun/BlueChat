@@ -13,6 +13,12 @@ typedef NS_ENUM(NSInteger, BCMessageDirection) {
     BCMessageDirectionIncoming
 };
 
+typedef NS_ENUM(NSInteger, BCMessageOutgoingState) {
+    BCMessageOutgoingStateSending,
+    BCMessageOutgoingStateSent,
+    BCMessageOutgoingStateFailed
+};
+
 @interface BCMessage : NSObject
 
 
@@ -20,7 +26,7 @@ typedef NS_ENUM(NSInteger, BCMessageDirection) {
 
 @property (nonatomic) BCMessageDirection direction;
 
-@property (nonatomic) BOOL hasBeenSent;
+@property (nonatomic) BCMessageOutgoingState outgoingState;
 
 - (nullable instancetype)initWithMessage:(NSString * _Nonnull )message direction:(BCMessageDirection)direction;
 

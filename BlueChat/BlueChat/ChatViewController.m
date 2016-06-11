@@ -51,6 +51,8 @@ static const NSInteger MaxMessageLength = 140;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [self.chatManager leaveChatroom];
+    
     [self.view endEditing:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];

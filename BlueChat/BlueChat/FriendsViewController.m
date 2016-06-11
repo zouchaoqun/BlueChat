@@ -63,6 +63,14 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [self.friendsTableView reloadData];
 }
 
+- (void)showAlertMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Message", @"") message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -81,6 +89,17 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BCChatServerInfo *info = [[BCChatServerInfoManager sharedManager] serverAtIndex:indexPath.row isFriend:YES];
+    if (info) {
+        [[BCChatClient sharedInstance] connectToChatServer:info];
+    }
+    else {
+        [self showAlertMessage:NSLocalizedString(@"Could not connect to server. Please try again later.", @"")];
+    }
 }
 
 #pragma mark - BCChatServerDelegate
@@ -125,5 +144,16 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [self handleServicesReady:NO withMessage:errorMessage];
 }
 
+- (void)didConnectToChatServer {
+    
+    self.chatViewController.chatManager = [BCChatClient sharedInstance];
+    [self.navigationController pushViewController:self.chatViewController animated:YES];
+    
+}
+
+- (void)didFailToConnectToChatServer:(NSString *)errorMessage {
+    
+    [self showAlertMessage:errorMessage];
+}
 
 @end

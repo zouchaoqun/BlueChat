@@ -78,7 +78,8 @@
 - (void)sendMessage:(BCMessage *)bcMessage {
     
     NSData *data = [bcMessage.message dataUsingEncoding:NSUTF8StringEncoding];
-    bcMessage.hasBeenSent = [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralCharacteristic onSubscribedCentrals:nil];
+    BOOL sent = [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralCharacteristic onSubscribedCentrals:nil];
+    bcMessage.outgoingState = sent ? BCMessageOutgoingStateSent : BCMessageOutgoingStateFailed;
 }
 
 - (void)leaveChatroom {

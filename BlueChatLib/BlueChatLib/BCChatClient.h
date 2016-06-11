@@ -16,6 +16,12 @@
 
 - (void)chatClientDidBecomeUnready:(NSString * _Nonnull )errorMessage;
 
+- (void)didConnectToChatServer;
+
+- (void)didFailToConnectToChatServer:(NSString * _Nonnull )errorMessage;
+//
+//- (void)didDisconnectFromChatServer;
+
 @end
 
 @protocol BCChatServerSearchResultDelegate <NSObject>
@@ -26,7 +32,7 @@
 
 @end
 
-@interface BCChatClient : NSObject
+@interface BCChatClient : NSObject <BCChatManagerInterface>
 
 @property (nonatomic) BOOL isChatClientReady;
 
@@ -49,6 +55,6 @@
 
 - (void)stopSearchingForChatServer;
 
-- (void)connectToChatServer;
+- (void)connectToChatServer:(BCChatServerInfo * _Nonnull )serverInfo;
 
 @end
