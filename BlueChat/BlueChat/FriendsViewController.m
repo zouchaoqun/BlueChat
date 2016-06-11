@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *friendsTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addFriendBarButton;
 
+@property (copy, nonatomic) NSString *myName;
+
+@property (weak, nonatomic) UIAlertAction *nameAlertOkAction;
+
 @end
 
 @implementation FriendsViewController
@@ -29,19 +33,18 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     
     // we need to create the chatViewController now so it can be passed as chatManagerDelegate to BCChatServer
     // otherwise in edge cases the chatRoomDidClose message might be missed
-    self.chatViewController = [self createChatViewController];
-    
-    [[BCChatServer sharedInstance] initChatServerWithName:@"abcdefgh12345678" chatServerDelegate:self chatManagerDelegate:self.chatViewController];
-    
-    [[BCChatClient sharedInstance] initChatClientWithDelegate:self chatManagerDelegate:self.chatViewController];
+    [self askForName];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    [self.friendsTableView reloadData];
+    if (self.myName) {
+    
+        [self.friendsTableView reloadData];
 
-    // BCChatServer will take care of whether it can resume
-    [[BCChatServer sharedInstance] resumeChatServer];
+        // BCChatServer will take care of whether it can resume
+        [[BCChatServer sharedInstance] resumeChatServer];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,13 +53,68 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     
 }
 
+#pragma mark - Ask for name
+- (void)askForName {
+    
+    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Please enter your name so your friends can find you.\nName needs to be no more than %li characters.", @""), BCConstantMaximumNameLength];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Welcome", @"") message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        [textField addTarget:self action:@selector(nameTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    }];
+    
+    self.nameAlertOkAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [alert.textFields[0] removeTarget:self action:@selector(nameTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+        self.myName = alert.textFields[0].text;
+        
+        [self startServices];
+    }];
+    
+    self.nameAlertOkAction.enabled = NO;
+    [alert addAction:self.nameAlertOkAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)nameTextFieldChanged:(UITextField *)textField {
+    
+    if (!self.nameAlertOkAction) {
+        return;
+    }
+    
+    if (textField.text.length > 0 && textField.text.length <= BCConstantMaximumNameLength) {
+        self.nameAlertOkAction.enabled = YES;
+    }
+    else {
+        self.nameAlertOkAction.enabled = NO;
+    }
+}
+
 #pragma mark - Helpers
+- (void)startServices {
+    
+    self.chatViewController = [self createChatViewController];
+    
+    [[BCChatServer sharedInstance] initChatServerWithName:self.myName chatServerDelegate:self chatManagerDelegate:self.chatViewController];
+    
+    [[BCChatClient sharedInstance] initChatClientWithDelegate:self chatManagerDelegate:self.chatViewController];
+}
+
 - (ChatViewController *)createChatViewController {
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     return [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
 }
 
 - (void)handleServicesReady:(BOOL)ready withMessage:(NSString *)message {
+    
+    if (!self.myName) {
+        ready = NO;
+    }
     
     self.errorMessageLabel.text = message;
     self.errorMessageLabel.hidden = ready;
@@ -68,7 +126,7 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 
 - (void)showAlertMessage:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Message", @"") message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:nil];
