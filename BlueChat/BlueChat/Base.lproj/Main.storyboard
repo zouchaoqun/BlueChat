@@ -9,7 +9,7 @@
         <!--Friends-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="FriendsViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="FriendsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,9 +17,36 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Zk-sI-U6Z">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CL0-Hn-nc7">
+                                <rect key="frame" x="245" y="289" width="111" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CL0-Hn-nc7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NLt-Z3-yDW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Zk-sI-U6Z" secondAttribute="bottom" id="Y67-zu-7wJ"/>
+                            <constraint firstAttribute="trailing" secondItem="2Zk-sI-U6Z" secondAttribute="trailing" id="c2f-Le-Hmw"/>
+                            <constraint firstItem="CL0-Hn-nc7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fa5-Ep-bZf"/>
+                            <constraint firstItem="2Zk-sI-U6Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gvJ-I0-9k0"/>
+                            <constraint firstItem="2Zk-sI-U6Z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="xxh-ph-h2X"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Friends" id="Ncf-Wb-9z5"/>
+                    <navigationItem key="navigationItem" title="Friends" id="Ncf-Wb-9z5">
+                        <barButtonItem key="rightBarButtonItem" title="Add friend" id="MBo-di-Lky"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addFriendBarButton" destination="MBo-di-Lky" id="Dbw-qZ-WVc"/>
+                        <outlet property="errorMessageLabel" destination="CL0-Hn-nc7" id="t4a-MV-vwX"/>
+                        <outlet property="friendsTableView" destination="2Zk-sI-U6Z" id="ukt-z2-OyO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,7 +150,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0G-b3-lpC">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0G-b3-lpC">
                                         <rect key="frame" x="550" y="21" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="V7C-qw-zdJ"/>
@@ -168,6 +195,7 @@
                         <outlet property="messageLengthLabel" destination="nbM-Um-hwc" id="U1U-Fp-XIY"/>
                         <outlet property="messageTableView" destination="OVp-bf-Bbr" id="Qfd-jM-YZL"/>
                         <outlet property="messageTextView" destination="PU3-MN-zJz" id="gbe-8B-frY"/>
+                        <outlet property="sendButton" destination="Z0G-b3-lpC" id="vdk-jk-cWA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bvI-E3-qzI" userLabel="First Responder" sceneMemberID="firstResponder"/>

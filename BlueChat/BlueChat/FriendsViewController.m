@@ -13,6 +13,9 @@
 @interface FriendsViewController () <BCChatServerDelegate>
 
 @property (strong, nonatomic) ChatViewController *chatViewController;
+@property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
+@property (weak, nonatomic) IBOutlet UITableView *friendsTableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addFriendBarButton;
 
 @end
 
@@ -26,7 +29,7 @@
     // otherwise in edge cases the chatRoomDidClose message might be missed
     self.chatViewController = [self createChatViewController];
     
-    [[BCChatServer sharedInstance] startChatServerWithName:@"abcdefgh12345678" chatServerDelegate:self chatManagerDelegate:self.chatViewController];
+    [[BCChatServer sharedInstance] initChatServerWithName:@"abcdefgh12345678" chatServerDelegate:self chatManagerDelegate:self.chatViewController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,14 +43,26 @@
     return [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
 }
 
+- (void)handleServicesReady:(BOOL)ready withMessage:(NSString *)message {
+    
+    self.errorMessageLabel.text = message;
+    self.errorMessageLabel.hidden = ready;
+    self.friendsTableView.hidden = !ready;
+    self.addFriendBarButton.enabled = ready;
+}
+
 #pragma mark - BCChatServerDelegate
 
 - (void)chatServerDidStart {
+    
     NSLog(@"chat server started");
+    [self handleServicesReady:YES withMessage:@""];
 }
 
-- (void)chatServerDidFailToStart:(NSString *)errorMessage {
-    NSLog(@"chat server failed to start %@", errorMessage);
+- (void)chatServerDidFail:(NSString *)errorMessage {
+  
+    NSLog(@"chat server failed %@", errorMessage);
+    [self handleServicesReady:NO withMessage:errorMessage];
 }
 
 - (void)chatClientDidCome {

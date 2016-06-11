@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLengthLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
 
 @property (nonatomic) CGFloat originalBottomSpace;
@@ -38,6 +40,7 @@ static const NSInteger MaxMessageLength = 140;
     [[BCMessageManager sharedManager] removeAllMessages];
     [self.messageTableView reloadData];
     self.messageTextView.text = @"";
+    [self handleMessageTextViewChagne];
     
     self.originalBottomSpace = self.bottomSpaceConstraint.constant;
     
@@ -62,7 +65,11 @@ static const NSInteger MaxMessageLength = 140;
         [self reloadMessages];
         
         [self.chatManager sendMessage:bcMessage];
+        
+        self.messageTextView.text = @"";
+        [self handleMessageTextViewChagne];
     }
+    
 }
 
 - (IBAction)viewTapped:(id)sender {
@@ -99,7 +106,10 @@ static const NSInteger MaxMessageLength = 140;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    self.messageLengthLabel.text = [NSString stringWithFormat:@"%lu", MaxMessageLength - textView.text.length];
+    
+    if (textView == self.messageTextView) {
+        [self handleMessageTextViewChagne];
+    }
 }
 
 #pragma mark - Helpers
@@ -114,6 +124,12 @@ static const NSInteger MaxMessageLength = 140;
     CGRect rect = CGRectMake(0, self.messageTableView.contentSize.height - self.messageTableView.bounds.size.height, self.messageTableView.bounds.size.width, self.messageTableView.bounds.size.height);
     
     [self.messageTableView scrollRectToVisible:rect animated:YES];
+}
+
+- (void)handleMessageTextViewChagne {
+    self.messageLengthLabel.text = [NSString stringWithFormat:@"%lu", MaxMessageLength - self.messageTextView.text.length];
+    
+    self.sendButton.enabled = (self.messageTextView.text.length > 0);
 }
 
 #pragma mark - BCChatManagerDelegate

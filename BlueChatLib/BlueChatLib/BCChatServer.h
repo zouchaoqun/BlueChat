@@ -22,11 +22,11 @@
 - (void)chatServerDidStart;
 
 /**
- *  The chat server could not be started.
+ *  The chat server could not be started or interrupted.
  *
  *  @param errorMessage The reason of start failure.
  */
-- (void)chatServerDidFailToStart:(NSString * _Nonnull)errorMessage;
+- (void)chatServerDidFail:(NSString * _Nonnull)errorMessage;
 
 /**
  *  A chat client did come
@@ -48,17 +48,19 @@
 + (nullable instancetype)sharedInstance;
 
 /**
- *  Start the chat server.
+ *  Initialize the chat server.
  *
  *  @param name                 The server name. If it's longer than @BCConstantMaximumNameLength it will be truncated.
  *  @param chatServerDelegate   The BCChatServerDelegate which implements the chat server related methods
  *  @param chatManagerDelegate  The BCChatManagerDelegate which implements common methods related to both chat server and chat client
  */
-- (void)startChatServerWithName:(NSString * _Nonnull)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate;
+- (void)initChatServerWithName:(NSString * _Nonnull)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate;
 
 /**
- *  Stop the chat server.
+ *  Pause the chat server, which stops the advertising.
  */
-- (void)stopChatServier;
+- (void)pauseChatServier;
+
+- (void)resumeChatServer;
 
 @end

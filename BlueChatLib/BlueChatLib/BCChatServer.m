@@ -28,6 +28,8 @@
 
 @property (weak, nonatomic) id<BCChatManagerDelegate> chatManagerDelegate;
 
+@property (copy, nonatomic) NSString *lastErrormessage;
+
 @end
 
 @implementation BCChatServer
@@ -42,7 +44,7 @@
     return sharedInstance;
 }
 
-- (void)startChatServerWithName:(NSString *)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate {
+- (void)initChatServerWithName:(NSString *)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate {
     
     self.chatServerDelegate = chatServerDelegate;
     self.chatManagerDelegate = chatManagerDelegate;
@@ -57,9 +59,20 @@
     self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
 }
 
-- (void)stopChatServier {
+- (void)pauseChatServier {
     
-    [self.peripheralManager stopAdvertising];
+    if (self.peripheralManager.isAdvertising) {
+        [self.peripheralManager stopAdvertising];
+    }
+}
+
+- (void)resumeChatServer {
+    if (!self.peripheralManager.isAdvertising) {
+        [self.peripheralManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[self.chatService.UUID], CBAdvertisementDataLocalNameKey : self.serverName}];
+    }
+    else {
+        [self.chatServerDelegate chatServerDidStart];
+    }
 }
 
 #pragma mark - BCChatManagerInterface
@@ -91,29 +104,38 @@
     [self.peripheralManager addService:self.chatService];
 }
 
-- (void)reportStartFailedWithReason:(NSString *)reason {
+- (void)reportFailedWithReason:(NSString *)reason {
     
-    [self.chatServerDelegate chatServerDidFailToStart:reason];
+    self.lastErrormessage = reason;
+    [self.chatServerDelegate chatServerDidFail:reason];
+    [self.chatManagerDelegate chatRoomDidClose];
 }
 
 #pragma mark - CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheralManager {
 
+    NSLog(@"did update state %li", (long)peripheralManager.state);
+    
     switch (peripheralManager.state) {
         case CBPeripheralManagerStatePoweredOn:
-            [self setupServiceCharacteristics];
+            if (!self.chatService) {
+                [self setupServiceCharacteristics];
+            }
+            else {
+                [self resumeChatServer];
+            }
             break;
             
         case CBPeripheralManagerStatePoweredOff:
-            [self reportStartFailedWithReason:NSLocalizedString(@"Please enable Bluetooth then try again.", @"")];
+            [self reportFailedWithReason:NSLocalizedString(@"Please enable Bluetooth then try again.", @"")];
             break;
             
         case CBPeripheralManagerStateUnsupported:
-            [self reportStartFailedWithReason:NSLocalizedString(@"You device does not support this app.", @"")];
+            [self reportFailedWithReason:NSLocalizedString(@"You device does not support this app.", @"")];
             break;
             
         case CBPeripheralManagerStateUnauthorized:
-            [self reportStartFailedWithReason:NSLocalizedString(@"Please authorize this app to use Bluetooth then try again.", @"")];
+            [self reportFailedWithReason:NSLocalizedString(@"Please authorize this app to use Bluetooth then try again.", @"")];
             break;
 
         default:
@@ -126,10 +148,10 @@
     
     if (error) {
         NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Could not start service\nInfo: %@", @""), error.localizedDescription];
-        [self reportStartFailedWithReason:message];
+        [self reportFailedWithReason:message];
     }
     else {
-        [self.peripheralManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[self.chatService.UUID], CBAdvertisementDataLocalNameKey : self.serverName}];
+        [self resumeChatServer];
     }
 }
 
@@ -137,7 +159,7 @@
     
     if (error) {
         NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Could not start service\nInfo: %@", @""), error.localizedDescription];
-        [self reportStartFailedWithReason:message];
+        [self reportFailedWithReason:message];
     }
     else {
         [self.chatServerDelegate chatServerDidStart];

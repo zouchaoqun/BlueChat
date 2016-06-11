@@ -17,6 +17,10 @@
 		1438D0221D0AD18D00321A02 /* BCMessageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1438D0201D0AD18D00321A02 /* BCMessageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1438D0231D0AD18D00321A02 /* BCMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438D0211D0AD18D00321A02 /* BCMessageManager.m */; };
 		1438D0251D0AEB7400321A02 /* BCChatManagerInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 1438D0241D0AEB7400321A02 /* BCChatManagerInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1438D02B1D0BB88300321A02 /* BCChatClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1438D0291D0BB88300321A02 /* BCChatClient.h */; };
+		1438D02C1D0BB88300321A02 /* BCChatClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438D02A1D0BB88300321A02 /* BCChatClient.m */; };
+		1438D02F1D0BB9A700321A02 /* BCChatServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1438D02D1D0BB9A700321A02 /* BCChatServerInfo.h */; };
+		1438D0301D0BB9A700321A02 /* BCChatServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438D02E1D0BB9A700321A02 /* BCChatServerInfo.m */; };
 		147611EC1D08491D0030307C /* BlueChatLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 147611EB1D08491D0030307C /* BlueChatLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		147611F31D08491D0030307C /* BlueChatLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 147611E81D08491D0030307C /* BlueChatLib.framework */; };
 		147611F81D08491D0030307C /* BlueChatLibTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611F71D08491D0030307C /* BlueChatLibTests.m */; };
@@ -43,6 +47,10 @@
 		1438D0201D0AD18D00321A02 /* BCMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMessageManager.h; sourceTree = "<group>"; };
 		1438D0211D0AD18D00321A02 /* BCMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMessageManager.m; sourceTree = "<group>"; };
 		1438D0241D0AEB7400321A02 /* BCChatManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCChatManagerInterface.h; sourceTree = "<group>"; };
+		1438D0291D0BB88300321A02 /* BCChatClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCChatClient.h; sourceTree = "<group>"; };
+		1438D02A1D0BB88300321A02 /* BCChatClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCChatClient.m; sourceTree = "<group>"; };
+		1438D02D1D0BB9A700321A02 /* BCChatServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCChatServerInfo.h; sourceTree = "<group>"; };
+		1438D02E1D0BB9A700321A02 /* BCChatServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCChatServerInfo.m; sourceTree = "<group>"; };
 		147611E81D08491D0030307C /* BlueChatLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueChatLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		147611EB1D08491D0030307C /* BlueChatLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlueChatLib.h; sourceTree = "<group>"; };
 		147611ED1D08491D0030307C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,14 +112,18 @@
 				147611EB1D08491D0030307C /* BlueChatLib.h */,
 				147611ED1D08491D0030307C /* Info.plist */,
 				1438D0241D0AEB7400321A02 /* BCChatManagerInterface.h */,
-				1413E9E91D085721008350D4 /* BCChatServer.h */,
-				1413E9EA1D085721008350D4 /* BCChatServer.m */,
 				1413E9FA1D085EE7008350D4 /* BCConstants.h */,
 				1413E9FC1D085F00008350D4 /* BCConstants.m */,
+				1413E9E91D085721008350D4 /* BCChatServer.h */,
+				1413E9EA1D085721008350D4 /* BCChatServer.m */,
+				1438D0291D0BB88300321A02 /* BCChatClient.h */,
+				1438D02A1D0BB88300321A02 /* BCChatClient.m */,
 				1438D01C1D0AD0DA00321A02 /* BCMessage.h */,
 				1438D01D1D0AD0DA00321A02 /* BCMessage.m */,
 				1438D0201D0AD18D00321A02 /* BCMessageManager.h */,
 				1438D0211D0AD18D00321A02 /* BCMessageManager.m */,
+				1438D02D1D0BB9A700321A02 /* BCChatServerInfo.h */,
+				1438D02E1D0BB9A700321A02 /* BCChatServerInfo.m */,
 			);
 			path = BlueChatLib;
 			sourceTree = "<group>";
@@ -132,6 +144,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1438D02F1D0BB9A700321A02 /* BCChatServerInfo.h in Headers */,
+				1438D02B1D0BB88300321A02 /* BCChatClient.h in Headers */,
 				147611EC1D08491D0030307C /* BlueChatLib.h in Headers */,
 				1413E9EB1D085721008350D4 /* BCChatServer.h in Headers */,
 				1413E9FB1D085EE7008350D4 /* BCConstants.h in Headers */,
@@ -238,9 +252,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1413E9FD1D085F00008350D4 /* BCConstants.m in Sources */,
+				1438D02C1D0BB88300321A02 /* BCChatClient.m in Sources */,
 				1438D01F1D0AD0DA00321A02 /* BCMessage.m in Sources */,
 				1438D0231D0AD18D00321A02 /* BCMessageManager.m in Sources */,
 				1413E9EC1D085721008350D4 /* BCChatServer.m in Sources */,
+				1438D0301D0BB9A700321A02 /* BCChatServerInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
