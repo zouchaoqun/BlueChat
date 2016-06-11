@@ -66,6 +66,11 @@
 }
 
 - (void)resumeChatServer {
+    
+    if (self.peripheralManager.state != CBPeripheralManagerStatePoweredOn) {
+        return;
+    }
+    
     if (!self.peripheralManager.isAdvertising) {
         [self.peripheralManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[self.chatService.UUID], CBAdvertisementDataLocalNameKey : self.serverName}];
     }

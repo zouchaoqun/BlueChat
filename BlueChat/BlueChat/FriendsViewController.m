@@ -39,6 +39,9 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 - (void)viewWillAppear:(BOOL)animated {
     
     [self.friendsTableView reloadData];
+
+    // BCChatServer will take care of whether it can resume
+    [[BCChatServer sharedInstance] resumeChatServer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +74,13 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)chatDidBeginWithChatManager:(id<BCChatManagerInterface>)chatManager {
+    [[BCChatServer sharedInstance] pauseChatServier];
+    
+    self.chatViewController.chatManager = chatManager;
+    [self.navigationController pushViewController:self.chatViewController animated:YES];
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -100,6 +110,8 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     else {
         [self showAlertMessage:NSLocalizedString(@"Could not connect to server. Please try again later.", @"")];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - BCChatServerDelegate
@@ -124,8 +136,7 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
         return;
     }
     
-    self.chatViewController.chatManager = [BCChatServer sharedInstance];
-    [self.navigationController pushViewController:self.chatViewController animated:YES];
+    [self chatDidBeginWithChatManager:[BCChatServer sharedInstance]];
 }
 
 
@@ -146,9 +157,7 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 
 - (void)didConnectToChatServer {
     
-    self.chatViewController.chatManager = [BCChatClient sharedInstance];
-    [self.navigationController pushViewController:self.chatViewController animated:YES];
-    
+    [self chatDidBeginWithChatManager:[BCChatClient sharedInstance]];
 }
 
 - (void)didFailToConnectToChatServer:(NSString *)errorMessage {

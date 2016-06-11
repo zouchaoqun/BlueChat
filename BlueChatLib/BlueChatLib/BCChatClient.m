@@ -111,6 +111,8 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
 
 - (void)leaveChatroom {
     if (self.activePeripheral && self.activePeripheral.state != CBPeripheralStateDisconnected) {
+        
+        NSLog(@"cancelling connection");
         [self.centralManager cancelPeripheralConnection:self.activePeripheral];
     }
 }
