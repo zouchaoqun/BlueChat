@@ -19,5 +19,8 @@ FOUNDATION_EXPORT const unsigned char BlueChatLibVersionString[];
 #import <BlueChatLib/BCConstants.h>
 #import <BlueChatLib/BCChatManagerInterface.h>
 #import <BlueChatLib/BCChatServer.h>
+#import <BlueChatLib/BCChatClient.h>
 #import <BlueChatLib/BCMessage.h>
 #import <BlueChatLib/BCMessageManager.h>
+#import <BlueChatLib/BCChatServerInfo.h>
+#import <BlueChatLib/BCChatServerInfoManager.h>

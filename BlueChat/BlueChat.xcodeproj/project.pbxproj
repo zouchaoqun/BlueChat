@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1400C1E11D0BFE18002A6F9D /* AddFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1400C1E01D0BFE18002A6F9D /* AddFriendTableViewController.m */; };
 		1413E9F81D085E63008350D4 /* BlueChatLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1413E9F71D085E63008350D4 /* BlueChatLib.framework */; };
 		1413E9F91D085E63008350D4 /* BlueChatLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1413E9F71D085E63008350D4 /* BlueChatLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1438D0281D0AEE2800321A02 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438D0271D0AEE2800321A02 /* ChatViewController.m */; };
@@ -52,6 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1400C1DF1D0BFE18002A6F9D /* AddFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendTableViewController.h; sourceTree = "<group>"; };
+		1400C1E01D0BFE18002A6F9D /* AddFriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendTableViewController.m; sourceTree = "<group>"; };
 		1413E9F71D085E63008350D4 /* BlueChatLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = BlueChatLib.framework; path = "/Users/maxzou/Library/Developer/Xcode/DerivedData/BlueChat-fteywjrzuagguccldtrakctqxvhb/Build/Products/Debug-iphoneos/BlueChatLib.framework"; sourceTree = "<absolute>"; };
 		1438D0261D0AEE2800321A02 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		1438D0271D0AEE2800321A02 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				147611821D0848D10030307C /* AppDelegate.m */,
 				147611841D0848D10030307C /* FriendsViewController.h */,
 				147611851D0848D10030307C /* FriendsViewController.m */,
+				1400C1DF1D0BFE18002A6F9D /* AddFriendTableViewController.h */,
+				1400C1E01D0BFE18002A6F9D /* AddFriendTableViewController.m */,
 				1438D0261D0AEE2800321A02 /* ChatViewController.h */,
 				1438D0271D0AEE2800321A02 /* ChatViewController.m */,
 				147611871D0848D10030307C /* Main.storyboard */,
@@ -306,6 +311,7 @@
 				147611861D0848D10030307C /* FriendsViewController.m in Sources */,
 				147611831D0848D10030307C /* AppDelegate.m in Sources */,
 				1438D0281D0AEE2800321A02 /* ChatViewController.m in Sources */,
+				1400C1E11D0BFE18002A6F9D /* AddFriendTableViewController.m in Sources */,
 				147611801D0848D10030307C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

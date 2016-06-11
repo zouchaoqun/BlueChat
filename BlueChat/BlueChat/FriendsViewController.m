@@ -10,7 +10,7 @@
 #import "ChatViewController.h"
 #import <BlueChatLib/BlueChatLib.h>
 
-@interface FriendsViewController () <BCChatServerDelegate>
+@interface FriendsViewController () <BCChatServerDelegate, BCChatClientDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) ChatViewController *chatViewController;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
@@ -21,6 +21,8 @@
 
 @implementation FriendsViewController
 
+static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewCell";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -30,6 +32,13 @@
     self.chatViewController = [self createChatViewController];
     
     [[BCChatServer sharedInstance] initChatServerWithName:@"abcdefgh12345678" chatServerDelegate:self chatManagerDelegate:self.chatViewController];
+    
+    [[BCChatClient sharedInstance] initChatClientWithDelegate:self chatManagerDelegate:self.chatViewController];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self.friendsTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +47,7 @@
     
 }
 
+#pragma mark - Helpers
 - (ChatViewController *)createChatViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     return [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
@@ -49,14 +59,37 @@
     self.errorMessageLabel.hidden = ready;
     self.friendsTableView.hidden = !ready;
     self.addFriendBarButton.enabled = ready;
+    
+    [self.friendsTableView reloadData];
+}
+
+#pragma mark - UITableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [[BCChatServerInfoManager sharedManager] numberOfServers:YES];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FriendsTableViewCellReuseIdentifier];
+
+    BCChatServerInfo *info = [[BCChatServerInfoManager sharedManager] serverAtIndex:indexPath.row isFriend:YES];
+    if (info) {
+        cell.textLabel.text = info.name;
+    }
+    
+    return cell;
 }
 
 #pragma mark - BCChatServerDelegate
-
 - (void)chatServerDidStart {
     
     NSLog(@"chat server started");
-    [self handleServicesReady:YES withMessage:@""];
+    if ([BCChatClient sharedInstance].isChatClientReady) {
+        [self handleServicesReady:YES withMessage:@""];
+    }
 }
 
 - (void)chatServerDidFail:(NSString *)errorMessage {
@@ -76,6 +109,21 @@
     [self.navigationController pushViewController:self.chatViewController animated:YES];
 }
 
+
+#pragma mark - BCChatClientDelegate
+- (void)chatClientDidBecomeReady {
+    
+    NSLog(@"chat cleint ready");
+    if ([BCChatServer sharedInstance].isChatServerReady) {
+        [self handleServicesReady:YES withMessage:@""];
+    }
+}
+
+- (void)chatClientDidBecomeUnready:(NSString *)errorMessage {
+    
+    NSLog(@"chat client unready %@", errorMessage);
+    [self handleServicesReady:NO withMessage:errorMessage];
+}
 
 
 @end

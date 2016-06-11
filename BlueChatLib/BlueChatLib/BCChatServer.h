@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "BCChatManagerInterface.h"
 
-@import CoreBluetooth;
-
 /**
  *  The chat server delegate.
  */
@@ -26,7 +24,7 @@
  *
  *  @param errorMessage The reason of start failure.
  */
-- (void)chatServerDidFail:(NSString * _Nonnull)errorMessage;
+- (void)chatServerDidFail:(NSString * _Nonnull )errorMessage;
 
 /**
  *  A chat client did come
@@ -40,6 +38,8 @@
  */
 @interface BCChatServer : NSObject <BCChatManagerInterface>
 
+@property (nonatomic) BOOL isChatServerReady;
+
 /**
  *  Get the shared instance.
  *
@@ -51,10 +51,10 @@
  *  Initialize the chat server.
  *
  *  @param name                 The server name. If it's longer than @BCConstantMaximumNameLength it will be truncated.
- *  @param chatServerDelegate   The BCChatServerDelegate which implements the chat server related methods
- *  @param chatManagerDelegate  The BCChatManagerDelegate which implements common methods related to both chat server and chat client
+ *  @param chatServerDelegate   The BCChatServerDelegate which implements the chat server delegate related methods
+ *  @param chatManagerDelegate  The BCChatManagerDelegate which implements common delegate methods related to both chat server and chat client
  */
-- (void)initChatServerWithName:(NSString * _Nonnull)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate;
+- (void)initChatServerWithName:(NSString * _Nonnull )name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull )chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull )chatManagerDelegate;
 
 /**
  *  Pause the chat server, which stops the advertising.

@@ -10,4 +10,14 @@
 
 @implementation BCChatServerInfo
 
+- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral name:(NSString *)name {
+    
+    if (self = [super init]) {
+        
+        self.name = name;
+        self.peripheral = peripheral;
+    }
+    return self;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "BCChatServer.h"
 #import "BCConstants.h"
 #import "BCMessageManager.h"
+@import CoreBluetooth;
 
 @interface BCChatServer () <CBPeripheralManagerDelegate>
 
@@ -28,8 +29,6 @@
 
 @property (weak, nonatomic) id<BCChatManagerDelegate> chatManagerDelegate;
 
-@property (copy, nonatomic) NSString *lastErrormessage;
-
 @end
 
 @implementation BCChatServer
@@ -44,7 +43,7 @@
     return sharedInstance;
 }
 
-- (void)initChatServerWithName:(NSString *)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull)chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull)chatManagerDelegate {
+- (void)initChatServerWithName:(NSString *)name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull )chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull )chatManagerDelegate {
     
     self.chatServerDelegate = chatServerDelegate;
     self.chatManagerDelegate = chatManagerDelegate;
@@ -71,7 +70,7 @@
         [self.peripheralManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[self.chatService.UUID], CBAdvertisementDataLocalNameKey : self.serverName}];
     }
     else {
-        [self.chatServerDelegate chatServerDidStart];
+        [self reportChatServerReady];
     }
 }
 
@@ -106,9 +105,15 @@
 
 - (void)reportFailedWithReason:(NSString *)reason {
     
-    self.lastErrormessage = reason;
+    self.isChatServerReady = NO;
     [self.chatServerDelegate chatServerDidFail:reason];
     [self.chatManagerDelegate chatRoomDidClose];
+}
+
+- (void)reportChatServerReady {
+    
+    self.isChatServerReady = YES;
+    [self.chatServerDelegate chatServerDidStart];
 }
 
 #pragma mark - CBPeripheralManagerDelegate
@@ -162,7 +167,7 @@
         [self reportFailedWithReason:message];
     }
     else {
-        [self.chatServerDelegate chatServerDidStart];
+        [self reportChatServerReady];
     }
 }
 

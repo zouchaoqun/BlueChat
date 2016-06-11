@@ -22,7 +22,7 @@
 
 @protocol BCChatManagerInterface <NSObject>
 
-- (void)sendMessage:(BCMessage * _Nonnull)bcMessage;
+- (void)sendMessage:(BCMessage * _Nonnull )bcMessage;
 
 - (void)leaveChatroom;
 

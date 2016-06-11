@@ -22,6 +22,6 @@ typedef NS_ENUM(NSInteger, BCMessageDirection) {
 
 @property (nonatomic) BOOL hasBeenSent;
 
-- (nullable instancetype)initWithMessage:(NSString * _Nonnull)message direction:(BCMessageDirection)direction;
+- (nullable instancetype)initWithMessage:(NSString * _Nonnull )message direction:(BCMessageDirection)direction;
 
 @end

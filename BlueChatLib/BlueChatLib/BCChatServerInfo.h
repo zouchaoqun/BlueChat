@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@import CoreBluetooth;
+
 /**
  *  Information of a chat server like identifier, name etc
  */
 @interface BCChatServerInfo : NSObject
 
+@property (copy, nonatomic) NSString * _Nonnull name;
 
+@property (strong, nonatomic) CBPeripheral * _Nonnull peripheral;
+
+- (nullable instancetype)initWithPeripheral:(CBPeripheral * _Nonnull )peripheral name:(NSString * _Nonnull )name;
 
 @end
