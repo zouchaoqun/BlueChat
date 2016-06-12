@@ -10,7 +10,7 @@
 #import "ChatViewController.h"
 #import <BlueChatLib/BlueChatLib.h>
 
-@interface FriendsViewController () <BCChatServerDelegate, BCChatClientDelegate, UITableViewDataSource>
+@interface FriendsViewController () <BCChatServerDelegate, BCChatClientDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) ChatViewController *chatViewController;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
@@ -56,12 +56,13 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 #pragma mark - Ask for name
 - (void)askForName {
     
-    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Please enter your name so your friends can find you.\nName needs to be no more than %li characters.", @""), BCConstantMaximumNameLength];
+    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Please enter your name so your friends can find you.\nMaximum %li characters.", @""), BCConstantMaximumNameLength];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Welcome", @"") message:message preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
+        textField.delegate = self;
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         [textField addTarget:self action:@selector(nameTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     }];
@@ -92,6 +93,17 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     else {
         self.nameAlertOkAction.enabled = NO;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    // allow delete
+    if (string.length == 0) {
+        return YES;
+    }
+    
+    NSInteger newLength = textField.text.length + range.length + string.length;
+    return newLength <= BCConstantMaximumNameLength;
 }
 
 #pragma mark - Helpers
