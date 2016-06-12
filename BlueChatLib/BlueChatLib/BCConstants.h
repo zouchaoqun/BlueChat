@@ -26,17 +26,17 @@ typedef NS_ENUM(NSInteger, BCConstant) {
 extern NSString *const BCChatServiceUUID;
 
 /**
- *  UUID of the Characteristic for central to send messages to the peripheral. Write only.
+ *  UUID of the Characteristic for central to send messages to the peripheral. Write only. The data is UTF8 encoded text.
  */
 extern NSString *const BCChatCentralToPeripheralCharacteristicUUID;
 
 /**
- *  UUID of the Characteristic for peripheral to send messages to the central. Indicate and Read.
+ *  UUID of the Characteristic for peripheral to send messages to the central. Indicate and Read. The data is UTF8 encoded text.
  */
 extern NSString *const BCChatPeripheralToCentralCharacteristicUUID;
 
 /**
- *  UUID of the Characteristic for peripheral to tell the central to disconnect. Indicate and Read.
+ *  UUID of the Characteristic for peripheral to tell the central to disconnect. Indicate and Read. The data is one-byte integer and the value is not checked by the central.
  */
 extern NSString *const BCChatPeripheralToCentralDisconnectRequestCharacteristicUUID;
 

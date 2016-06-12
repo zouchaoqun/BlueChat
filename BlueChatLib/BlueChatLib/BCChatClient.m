@@ -27,12 +27,18 @@
 
 @property (strong, nonatomic) CBCharacteristic *centralToPeripheralCharacteristic;
 
+/**
+ *  We need to have a timeout so the user can choose to connect to another server if the current one is not available.
+ */
 @property (strong, nonatomic) NSTimer *connectionTimeoutTimer;
 
 @property (nonatomic) BOOL peripheralToCentralNotificationEnabled;
 
 @property (nonatomic) BOOL peripheralDisconnectNotificationEnabled;
 
+/**
+ *  The array is used to track the outgoing state of the message since the value write result is delivered by CoreBluetooth asynchronously. It can't cover all edge cases since if one of several pending messages fails to reach the peripheral there is no way to tell which one has failed. There needs to be some kind of application level message identifier between the central and peripheral to be able to track a single message's state. 
+ */
 @property (strong, nonatomic) NSMutableArray *outgoingMessageArray;
 
 @end
@@ -77,20 +83,19 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
 
 - (void)connectToChatServer:(BCChatServerInfo *)serverInfo {
     
-    if (serverInfo.peripheral) {
+    NSAssert(serverInfo.peripheral, @"No way to connect without a peripheral");
         
-        // we will cancel the previous connection if there is one and it's not disconnected
-        if (self.activePeripheral && self.activePeripheral.state != CBPeripheralStateDisconnected) {
-            [self.centralManager cancelPeripheralConnection:self.activePeripheral];
-        }
-        
-        self.peripheralToCentralNotificationEnabled = NO;
-        self.peripheralDisconnectNotificationEnabled = NO;
-        
-        self.activePeripheral = serverInfo.peripheral;
-        [self.centralManager connectPeripheral:self.activePeripheral options:nil];
-        [self startConnectionTimeoutTimer];
+    // we will cancel the previous connection if there is one and it's not disconnected
+    if (self.activePeripheral && self.activePeripheral.state != CBPeripheralStateDisconnected) {
+        [self.centralManager cancelPeripheralConnection:self.activePeripheral];
     }
+    
+    self.peripheralToCentralNotificationEnabled = NO;
+    self.peripheralDisconnectNotificationEnabled = NO;
+    
+    self.activePeripheral = serverInfo.peripheral;
+    [self.centralManager connectPeripheral:self.activePeripheral options:nil];
+    [self startConnectionTimeoutTimer];
 }
 
 #pragma mark - BCChatManagerInterface
@@ -106,6 +111,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
         [self.activePeripheral writeValue:data forCharacteristic:self.centralToPeripheralCharacteristic type:CBCharacteristicWriteWithResponse];
     }
     else {
+        // currently the outgoing state change is not notified. can be done in future if needed..
         bcMessage.outgoingState = BCMessageOutgoingStateFailed;
     }
 }
@@ -137,6 +143,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
     
     [self stopConnectionTimeoutTimer];
     
+    // clear the outgoing message array
     self.outgoingMessageArray = [NSMutableArray array];
     
     [self.chatClientDelegate didConnectToChatServer];
@@ -201,7 +208,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
 
-    // we won't add the same peripheral again
+    // we won't add the same peripheral again. but we might want to update its name. can be done in future..
     if ([[BCChatServerInfoManager sharedManager] hasPeripheral:peripheral]) {
         return;
     }
@@ -222,7 +229,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     
     if (peripheral == self.activePeripheral) {
-        //[self reportConnectedToServer];
+        // we don't report connected to server here since we still have several further steps like discovering service etc
         [self.activePeripheral setDelegate:self];
         [self.activePeripheral discoverServices:@[ [CBUUID UUIDWithString:BCChatServiceUUID] ]];
     }
@@ -237,7 +244,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     if (peripheral == self.activePeripheral) {
-        [self reportFailedToConnectToServer:NSLocalizedString(@"Could not connect to the server.", @"")];
+        [self reportFailedToConnectToServer:[NSString stringWithFormat:NSLocalizedString(@"Could not connect to the server. Info: %@", @""), error.localizedDescription]];
     }
 }
 
@@ -246,7 +253,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
     if (peripheral == self.activePeripheral) {
         
         if (error) {
-            [self reportFailedToConnectToServer:NSLocalizedString(@"Could not connect to the server. No service.", @"")];
+            [self reportFailedToConnectToServer:[NSString stringWithFormat:NSLocalizedString(@"Could not connect to the server. No service. Info: %@", @""), error.localizedDescription]];
             return;
         }
         
@@ -260,7 +267,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
         }
         
         if (!serviceFound) {
-            [self reportFailedToConnectToServer:NSLocalizedString(@"Could not connect to the server. No service.", @"")];
+            [self reportFailedToConnectToServer:NSLocalizedString(@"Could not connect to the server. No service. Info: %@", @"")];
             return;
         }
     }
@@ -271,7 +278,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
         if ([service.UUID.UUIDString isEqualToString:BCChatServiceUUID]) {
             
             if (error) {
-                [self reportFailedToConnectToServer:NSLocalizedString(@"Could not connect to the server. Service error.", @"")];
+                [self reportFailedToConnectToServer:[NSString stringWithFormat:NSLocalizedString(@"Could not connect to the server. Service error. Info: %@", @""), error.localizedDescription]];
                 return;
             }
             
@@ -307,7 +314,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
         
         if ([characteristic.service.UUID.UUIDString isEqualToString:BCChatServiceUUID]) {
             if (error) {
-                [self reportFailedToConnectToServer:NSLocalizedString(@"Could not connect to the server. Service error.", @"")];
+                [self reportFailedToConnectToServer:[NSString stringWithFormat:NSLocalizedString(@"Could not connect to the server. Service error. Info: %@", @""), error.localizedDescription]];
                 return;
             }
         }
@@ -331,10 +338,11 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
         
         if ([characteristic.UUID.UUIDString isEqualToString:BCChatCentralToPeripheralCharacteristicUUID]) {
             
-            // we try to get the first message and set its outgoing state
+            // we try to get the first message in the outgoing message array and set its outgoing state
             if (self.outgoingMessageArray.count > 0) {
                 BCMessage *bcMessage = [self.outgoingMessageArray firstObject];
                 if (bcMessage) {
+                    // currently the outgoing state change is not notified. can be done in future if needed..
                     bcMessage.outgoingState = (error == nil) ? BCMessageOutgoingStateSent : BCMessageOutgoingStateFailed;
                 }
                 [self.outgoingMessageArray removeObjectAtIndex:0];

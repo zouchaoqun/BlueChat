@@ -84,10 +84,15 @@
     
     NSData *data = [bcMessage.message dataUsingEncoding:NSUTF8StringEncoding];
     BOOL sent = [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralCharacteristic onSubscribedCentrals:nil];
+    
+    // currently the outgoing state change is not notified. can be done in future if needed..
     bcMessage.outgoingState = sent ? BCMessageOutgoingStateSent : BCMessageOutgoingStateFailed;
 }
 
 - (void)leaveChatroom {
+    
+    // the value doesn't matter here since the characteristic is only used to tell the central side to disconnect
+    // if there are more things we need to tell the central we can carefully define the values
     Byte bytes[1] = {0x01};
     NSData *data = [NSData dataWithBytes:bytes length:1];
     [self.peripheralManager updateValue:data forCharacteristic:self.peripheralToCentralDisconnectRequestCharacteristic onSubscribedCentrals:nil];

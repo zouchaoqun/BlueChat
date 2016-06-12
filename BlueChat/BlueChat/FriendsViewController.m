@@ -12,13 +12,23 @@
 
 @interface FriendsViewController () <BCChatServerDelegate, BCChatClientDelegate, UITableViewDataSource, UITextFieldDelegate>
 
+/**
+ *  The chat view controller. It's created beforehand to simplify the logic of ensuring we don't miss the events from the BCChatServer.
+ */
 @property (strong, nonatomic) ChatViewController *chatViewController;
+
 @property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
 @property (weak, nonatomic) IBOutlet UITableView *friendsTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addFriendBarButton;
 
+/**
+ *  The name of the chat server.
+ */
 @property (copy, nonatomic) NSString *myName;
 
+/**
+ *  The UIAlertAction in the alert we use to ask for server name. It's a property since we want to enable/disable it based on the text input.
+ */
 @property (weak, nonatomic) UIAlertAction *nameAlertOkAction;
 
 @end
@@ -31,8 +41,7 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    // we need to create the chatViewController now so it can be passed as chatManagerDelegate to BCChatServer
-    // otherwise in edge cases the chatRoomDidClose message might be missed
+    // now we ask for the server name everytime the app runs
     [self askForName];
 }
 
@@ -109,6 +118,9 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 #pragma mark - Helpers
 - (void)startServices {
     
+    // we need to create the chatViewController now so it can be passed as chatManagerDelegate to BCChatServer
+    // otherwise in edge cases the chatRoomDidClose message might be missed. There might be better method but this is used as a simplified
+    // logic in this demo app.
     self.chatViewController = [self createChatViewController];
     
     [[BCChatServer sharedInstance] initChatServerWithName:self.myName chatServerDelegate:self chatManagerDelegate:self.chatViewController];

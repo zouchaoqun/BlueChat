@@ -63,6 +63,7 @@ static const NSInteger MaxMessageLength = 140;
     NSString *message = self.messageTextView.text;
     if (message.length > 0) {
     
+        // we always show the message in UI first. in future improvement we can add outgoing state to the UI.
         BCMessage *bcMessage = [[BCMessageManager sharedManager] addMessage:message direction:BCMessageDirectionOutgoing];
         [self reloadMessages];
         
