@@ -19,6 +19,7 @@
 		1476118E1D0848D10030307C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1476118C1D0848D10030307C /* LaunchScreen.storyboard */; };
 		147611991D0848D10030307C /* BlueChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611981D0848D10030307C /* BlueChatTests.m */; };
 		147611A41D0848D10030307C /* BlueChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147611A31D0848D10030307C /* BlueChatUITests.m */; };
+		14CC6C311D0D34DE00425CCB /* SimpleLoadingHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CC6C301D0D34DE00425CCB /* SimpleLoadingHud.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		1476119F1D0848D10030307C /* BlueChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		147611A31D0848D10030307C /* BlueChatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlueChatUITests.m; sourceTree = "<group>"; };
 		147611A51D0848D10030307C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14CC6C2F1D0D34DE00425CCB /* SimpleLoadingHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleLoadingHud.h; sourceTree = "<group>"; };
+		14CC6C301D0D34DE00425CCB /* SimpleLoadingHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLoadingHud.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				1476118C1D0848D10030307C /* LaunchScreen.storyboard */,
 				1476118F1D0848D10030307C /* Info.plist */,
 				1476117E1D0848D10030307C /* Supporting Files */,
+				14CC6C2F1D0D34DE00425CCB /* SimpleLoadingHud.h */,
+				14CC6C301D0D34DE00425CCB /* SimpleLoadingHud.m */,
 			);
 			path = BlueChat;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 			files = (
 				147611861D0848D10030307C /* FriendsViewController.m in Sources */,
 				147611831D0848D10030307C /* AppDelegate.m in Sources */,
+				14CC6C311D0D34DE00425CCB /* SimpleLoadingHud.m in Sources */,
 				1438D0281D0AEE2800321A02 /* ChatViewController.m in Sources */,
 				1400C1E11D0BFE18002A6F9D /* AddFriendViewController.m in Sources */,
 				147611801D0848D10030307C /* main.m in Sources */,

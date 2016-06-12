@@ -9,6 +9,7 @@
 #import "FriendsViewController.h"
 #import "ChatViewController.h"
 #import <BlueChatLib/BlueChatLib.h>
+#import "SimpleLoadingHud.h"
 
 @interface FriendsViewController () <BCChatServerDelegate, BCChatClientDelegate, UITableViewDataSource, UITextFieldDelegate>
 
@@ -41,14 +42,16 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    // now we ask for the server name everytime the app runs
-    [self askForName];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    if (self.myName) {
-    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (!self.myName) {
+        // ask for the name if we haven't got it. we don't save the name currently so it asks everytime app is launched
+        [self askForName];
+    }
+    else {
         [self.friendsTableView reloadData];
 
         // BCChatServer will take care of whether it can resume
@@ -188,6 +191,7 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     
     BCChatServerInfo *info = [[BCChatServerInfoManager sharedManager] serverAtIndex:indexPath.row isFriend:YES];
     if (info) {
+        [SimpleLoadingHud showHudInView:self.navigationController.view];
         [[BCChatClient sharedInstance] connectToChatServer:info];
     }
     else {
@@ -226,7 +230,7 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 #pragma mark - BCChatClientDelegate
 - (void)chatClientDidBecomeReady {
     
-    NSLog(@"chat cleint ready");
+    NSLog(@"chat client ready");
     if ([BCChatServer sharedInstance].isChatServerReady) {
         [self handleServicesReady:YES withMessage:@""];
     }
@@ -240,11 +244,13 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
 
 - (void)didConnectToChatServer:(NSString *)serverName {
     
+    [SimpleLoadingHud hidHudInView:self.navigationController.view];
     [self chatDidBeginWithChatManager:[BCChatClient sharedInstance] andOtherParty:serverName];
 }
 
 - (void)didFailToConnectToChatServer:(NSString *)errorMessage {
     
+    [SimpleLoadingHud hidHudInView:self.navigationController.view];
     [self showAlertMessage:errorMessage];
 }
 
