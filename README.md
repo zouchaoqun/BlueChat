@@ -15,7 +15,7 @@ screen0 | screen1 | screen2 | screen3 | screen4 | screen5
 ------------ | ------------ | ------------ | ------------ | ------------ | ------------
 ![screen0](Documentation/screens/screen0.png) | ![screen1](Documentation/screens/screen1.png) | ![screen2](Documentation/screens/screen2.png) | ![screen3](Documentation/screens/screen3.png) | ![screen4](Documentation/screens/screen4.png) | ![screen5](Documentation/screens/screen5.png)
 
-Youtube link
+Youtube [![BlueChat](http://img.youtube.com/vi/HsO0i3VDbXk/0.jpg)](http://www.youtube.com/watch?v=HsO0i3VDbXk)
 
 ##### Design considerations
 * The users should not need to know how the two phones are connected over BLE and for them they just need to simply add another phone as a friend. It means the app needs to be able to hide the details of BLE central and peripheral and use the correct role in different scenarios
