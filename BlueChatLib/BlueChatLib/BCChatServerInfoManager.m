@@ -49,6 +49,20 @@
     return ([self findServerInfoInArray:self.friendServerArray byPeripheralIdentifier:peripheral.identifier] != nil) || ([self findServerInfoInArray:self.nonFriendServerArray byPeripheralIdentifier:peripheral.identifier] != nil);
 }
 
+- (NSString *)serverNameForPeripheral:(NSUUID *)uuid {
+    
+    BCChatServerInfo *info = [self findServerInfoInArray:self.friendServerArray byPeripheralIdentifier:uuid];
+    if (info) {
+        return info.name;
+    }
+    
+    info = [self findServerInfoInArray:self.nonFriendServerArray byPeripheralIdentifier:uuid];
+    if (info) {
+        return info.name;
+    }
+    return NSLocalizedString(@"(unknown)", @"");
+}
+
 - (void)removeAllNonFriendServers {
     @synchronized (self) {
         [self.nonFriendServerArray removeAllObjects];

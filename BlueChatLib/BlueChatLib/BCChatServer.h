@@ -28,8 +28,10 @@
 
 /**
  *  A chat client did come.
+ *
+ *  @param clientName The client name if it can be found in BCServerInfoManager based on its UUID or empty string if not.
  */
-- (void)chatClientDidCome;
+- (void)chatClientDidCome:(NSString * _Nonnull )clientName;
 
 @end
 

@@ -9,6 +9,8 @@
 #import "BCChatServer.h"
 #import "BCConstants.h"
 #import "BCMessageManager.h"
+#import "BCChatServerInfoManager.h"
+
 @import CoreBluetooth;
 
 @interface BCChatServer () <CBPeripheralManagerDelegate>
@@ -211,7 +213,9 @@
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     
     if (characteristic == self.peripheralToCentralCharacteristic) {
-        [self.chatServerDelegate chatClientDidCome];
+        
+        NSString *clientName = [[BCChatServerInfoManager sharedManager] serverNameForPeripheral:central.identifier];
+        [self.chatServerDelegate chatClientDidCome:clientName];
     }
 }
 

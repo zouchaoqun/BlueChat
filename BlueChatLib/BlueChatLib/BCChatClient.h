@@ -29,8 +29,10 @@
 
 /**
  *  The chat client has connected to the chat server.
+ *
+ *  @param serverName The server name.
  */
-- (void)didConnectToChatServer;
+- (void)didConnectToChatServer:(NSString * _Nonnull )serverName;
 
 /**
  *  The chat client could not connect to the chat server, 

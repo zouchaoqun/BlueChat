@@ -156,9 +156,10 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)chatDidBeginWithChatManager:(id<BCChatManagerInterface>)chatManager {
+- (void)chatDidBeginWithChatManager:(id<BCChatManagerInterface>)chatManager andOtherParty:(NSString *)otherPartyName {
     [[BCChatServer sharedInstance] pauseChatServier];
     
+    self.chatViewController.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"Chat with %@", @""), otherPartyName];
     self.chatViewController.chatManager = chatManager;
     [self.navigationController pushViewController:self.chatViewController animated:YES];
 }
@@ -211,14 +212,14 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [self handleServicesReady:NO withMessage:errorMessage];
 }
 
-- (void)chatClientDidCome {
+- (void)chatClientDidCome:(NSString *)clientName {
     
     if (self.navigationController.topViewController == self.chatViewController) {
         NSLog(@"already chatting");
         return;
     }
     
-    [self chatDidBeginWithChatManager:[BCChatServer sharedInstance]];
+    [self chatDidBeginWithChatManager:[BCChatServer sharedInstance] andOtherParty:clientName];
 }
 
 
@@ -237,9 +238,9 @@ static NSString *const FriendsTableViewCellReuseIdentifier = @"FriendsTableViewC
     [self handleServicesReady:NO withMessage:errorMessage];
 }
 
-- (void)didConnectToChatServer {
+- (void)didConnectToChatServer:(NSString *)serverName {
     
-    [self chatDidBeginWithChatManager:[BCChatClient sharedInstance]];
+    [self chatDidBeginWithChatManager:[BCChatClient sharedInstance] andOtherParty:serverName];
 }
 
 - (void)didFailToConnectToChatServer:(NSString *)errorMessage {

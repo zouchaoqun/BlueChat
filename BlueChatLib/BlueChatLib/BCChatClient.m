@@ -146,7 +146,12 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
     // clear the outgoing message array
     self.outgoingMessageArray = [NSMutableArray array];
     
-    [self.chatClientDelegate didConnectToChatServer];
+    NSString *serverName = @"";
+    if (self.activePeripheral) {
+        serverName = [[BCChatServerInfoManager sharedManager] serverNameForPeripheral:self.activePeripheral.identifier];
+    }
+    
+    [self.chatClientDelegate didConnectToChatServer:serverName];
 }
 
 - (void)reportFailedToConnectToServer:(NSString *)reason {

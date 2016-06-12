@@ -45,6 +45,15 @@
 - (BOOL)hasPeripheral:(CBPeripheral * _Nonnull )peripheral;
 
 /**
+ *  Get the server name related to the peripheral based on the UUID. It can also be used by the BCChatClient if the peripheral is now trying to connect as central role.
+ *
+ *  @param uuid UUID of the peripheral
+ *
+ *  @return The server name if the peripheral/central is found in either list, or localized "unknown" otherwise.
+ */
+- (NSString * _Nonnull )serverNameForPeripheral:(NSUUID * _Nonnull )uuid;
+
+/**
  *  Remove all the server info entries which are not marked as friends, i.e. from the nonfriend server list.
  */
 - (void)removeAllNonFriendServers;
