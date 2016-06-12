@@ -18,7 +18,7 @@ screen0 | screen1 | screen2 | screen3 | screen4 | screen5
 Youtube link
 
 ##### Design considerations
-* The users should not need to know how the two phones are connected over BLE and for them they just need to simply add another phone as friend. It means the app needs to be able to hide the details of BLE central and peripheral and use the correct role in different scenarios
+* The users should not need to know how the two phones are connected over BLE and for them they just need to simply add another phone as a friend. It means the app needs to be able to hide the details of BLE central and peripheral and use the correct role in different scenarios
 * The app runs in both Peripheral and Central roles and starts advertising as soon as it gets the name from the user inputs
 * Though the search/connect parts are different on peripheral and central side, the chat procedures are common on both sides like sendMessage, leaveChatroom, newMessage notification etc and they are abstracted in [BCChatManager and BCChatManagerDelegate](BlueChatLib/BlueChatLib/BCChatManagerInterface.h)
 
@@ -46,27 +46,27 @@ Youtube link
 extern NSString *const BCChatServiceUUID;
 
 /**
- *  UUID of the Characteristic for central to send messages to the peripheral. Write only. The data is UTF8 encoded text.
+ *  UUID of the Characteristic for the central to send messages to the peripheral. Write only. The data is UTF8 encoded text.
  */
 extern NSString *const BCChatCentralToPeripheralCharacteristicUUID;
 
 /**
- *  UUID of the Characteristic for peripheral to send messages to the central. Indicate and Read. The data is UTF8 encoded text.
+ *  UUID of the Characteristic for the peripheral to send messages to the central. Indicate and Read. The data is UTF8 encoded text.
  */
 extern NSString *const BCChatPeripheralToCentralCharacteristicUUID;
 
 /**
- *  UUID of the Characteristic for peripheral to tell the central to disconnect. Indicate and Read. The data is one-byte integer and the value is not checked by the central.
+ *  UUID of the Characteristic for the peripheral to tell the central to disconnect. Indicate and Read. The data is one-byte integer and the value is not checked by the central.
  */
 extern NSString *const BCChatPeripheralToCentralDisconnectRequestCharacteristicUUID;
 ```
 Check [BCConstants.m](BlueChatLib/BlueChatLib/BCConstants.m) for the UUIDs
 
 ##### Future improvements
-* Nothing is persisted currently. In future we can save the server name, friend list etc.
+* Nothing is persisted currently. In future, we can save the server name, friend list etc.
 * There is no special treatment to support 140 characters in the message because it is directly supported by CoreBluetooth, but if the app needs to work with Android or other devices the other party might not be able to handle such a long packet and some kind of application level protocol needs to be developed.
-* There is no simple way to track write results when there are mulitple pending write operations. Currently the app takes the CB write callback as the result of the first pending write operation but it might not be accurate all the time. Again application level protocol might be needed.
-* Connection is limited to one to make the UI simple but it shouldn't be too hard to support multiple chats (still each chat is 1-to-1).
+* There is no simple way to track write results when there are multiple pending write operations. Currently, the app takes the CB write callback as the result of the first pending write operation but it might not be accurate all the time. Again application level protocol might be needed.
+* The connection is limited to one to make the UI simple but it shouldn't be too hard to support multiple chats (still each chat is 1-to-1).
 
 ##### Class diagram
 
