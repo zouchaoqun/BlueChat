@@ -130,7 +130,7 @@ static const NSInteger MaxMessageLength = 140;
 }
 
 - (void)handleMessageTextViewChagne {
-    self.messageLengthLabel.text = [NSString stringWithFormat:@"%lu", MaxMessageLength - self.messageTextView.text.length];
+    self.messageLengthLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)(MaxMessageLength - self.messageTextView.text.length)];
     
     self.sendButton.enabled = (self.messageTextView.text.length > 0);
 }

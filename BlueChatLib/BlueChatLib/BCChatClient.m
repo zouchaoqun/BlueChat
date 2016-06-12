@@ -226,7 +226,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
     
     BCChatServerInfo *serverInfo = [[BCChatServerInfoManager sharedManager] addServer:peripheral name:localName];
     
-    if (self.searchResultDelegate) {
+    if (serverInfo && self.searchResultDelegate) {
         [self.searchResultDelegate didFindChatServer];
     }
 }
