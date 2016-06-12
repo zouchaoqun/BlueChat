@@ -89,6 +89,7 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
         
         self.activePeripheral = serverInfo.peripheral;
         [self.centralManager connectPeripheral:self.activePeripheral options:nil];
+        [self startConnectionTimeoutTimer];
     }
 }
 
@@ -134,9 +135,9 @@ static const NSTimeInterval ConnectionTimeoutTime = 3;
 
 - (void)reportConnectedToServer {
     
-    self.outgoingMessageArray = [NSMutableArray array];
-    
     [self stopConnectionTimeoutTimer];
+    
+    self.outgoingMessageArray = [NSMutableArray array];
     
     [self.chatClientDelegate didConnectToChatServer];
 }

@@ -1,5 +1,5 @@
 //
-//  AddFriendTableViewController.h
+//  AddFriendViewController.h
 //  BlueChat
 //
 //  Created by Max Zou on 11/06/2016.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddFriendTableViewController : UITableViewController
+@interface AddFriendViewController : UITableViewController
 
 @end

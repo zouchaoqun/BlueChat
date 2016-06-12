@@ -12,6 +12,9 @@
 #pragma mark - Constants
 
 typedef NS_ENUM(NSInteger, BCConstant) {
+    /**
+     *  The maximum length of the chat server name. There is a length limit because of the limited space in the BLE advertisement.
+     */
     BCConstantMaximumNameLength = 16
 };
 

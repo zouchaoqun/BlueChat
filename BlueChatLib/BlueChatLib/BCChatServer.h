@@ -10,7 +10,7 @@
 #import "BCChatManagerInterface.h"
 
 /**
- *  The chat server delegate.
+ *  The chat server delegate which receives the chat server statuses and events.
  */
 @protocol BCChatServerDelegate <NSObject>
 
@@ -20,14 +20,14 @@
 - (void)chatServerDidStart;
 
 /**
- *  The chat server could not be started or interrupted.
+ *  The chat server could not be started or has been interrupted.
  *
- *  @param errorMessage The reason of start failure.
+ *  @param errorMessage The reason of the failure.
  */
 - (void)chatServerDidFail:(NSString * _Nonnull )errorMessage;
 
 /**
- *  A chat client did come
+ *  A chat client did come.
  */
 - (void)chatClientDidCome;
 
@@ -38,6 +38,9 @@
  */
 @interface BCChatServer : NSObject <BCChatManagerInterface>
 
+/**
+ *  If the chat server is ready to advertise.
+ */
 @property (nonatomic) BOOL isChatServerReady;
 
 /**
@@ -48,19 +51,22 @@
 + (nullable instancetype)sharedInstance;
 
 /**
- *  Initialize the chat server.
+ *  Initialize and start the chat server. The chat server will call BCChatServerDelegate methods to report its status.
  *
  *  @param name                 The server name. If it's longer than @BCConstantMaximumNameLength it will be truncated.
- *  @param chatServerDelegate   The BCChatServerDelegate which implements the chat server delegate related methods
- *  @param chatManagerDelegate  The BCChatManagerDelegate which implements common delegate methods related to both chat server and chat client
+ *  @param chatServerDelegate   The BCChatServerDelegate which implements the chat server delegate related methods.
+ *  @param chatManagerDelegate  The BCChatManagerDelegate which implements the common delegate methods related to both chat server and chat client.
  */
 - (void)initChatServerWithName:(NSString * _Nonnull )name chatServerDelegate:(id<BCChatServerDelegate> _Nonnull )chatServerDelegate chatManagerDelegate:(id<BCChatManagerDelegate> _Nonnull )chatManagerDelegate;
 
 /**
- *  Pause the chat server, which stops the advertising.
+ *  Pause the chat server, i.e. stops the advertising. The chat server will call BCChatServerDelegate methods to report its status.
  */
 - (void)pauseChatServier;
 
+/**
+ *  Resume the chat server, i.e. restarts the advertising. The chat server will call BCChatServerDelegate methods to report its status.
+ */
 - (void)resumeChatServer;
 
 @end

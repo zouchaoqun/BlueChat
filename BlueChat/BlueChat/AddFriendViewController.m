@@ -1,19 +1,19 @@
 //
-//  AddFriendTableViewController.m
+//  AddFriendViewController.m
 //  BlueChat
 //
 //  Created by Max Zou on 11/06/2016.
 //  Copyright © 2016 Max Zou. All rights reserved.
 //
 
-#import "AddFriendTableViewController.h"
+#import "AddFriendViewController.h"
 #import <BlueChatLib/BlueChatLib.h>
 
-@interface AddFriendTableViewController () <BCChatServerSearchResultDelegate>
+@interface AddFriendViewController () <BCChatServerSearchResultDelegate>
 
 @end
 
-@implementation AddFriendTableViewController
+@implementation AddFriendViewController
 
 static NSString *const AddFriendTableViewCellReuseIdentifier = @"AddFriendTableViewCell";
 
