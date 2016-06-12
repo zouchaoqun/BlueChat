@@ -10,6 +10,8 @@
 
 @implementation SimpleLoadingHud
 
+static const CGFloat BackgroundViewWidth = 100.0f;
+
 + (SimpleLoadingHud *)showHudInView:(UIView *)view {
     
     SimpleLoadingHud *hud = [[self alloc] initWithFrame:view.frame];
@@ -47,8 +49,24 @@
     
     if (self = [super initWithFrame:frame]) {
         
+        // the background view
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, BackgroundViewWidth, BackgroundViewWidth)];
+        bgView.backgroundColor = [UIColor darkGrayColor];
+        bgView.alpha = 0.8;
+        bgView.layer.cornerRadius = 10;
+        bgView.clipsToBounds = YES;
+        
+        bgView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [self addSubview:bgView];
+        
+        [NSLayoutConstraint constraintWithItem:bgView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0].active = YES;
+        [NSLayoutConstraint constraintWithItem:bgView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0].active = YES;
+        [NSLayoutConstraint constraintWithItem:bgView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:BackgroundViewWidth].active = YES;
+        [NSLayoutConstraint constraintWithItem:bgView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:BackgroundViewWidth].active = YES;
+        
+        // the activitiy indicator
         UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityIndicator.color = [UIColor blackColor];
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
         
