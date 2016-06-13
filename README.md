@@ -70,4 +70,4 @@ Check [BCConstants.m](BlueChatLib/BlueChatLib/BCConstants.m) for the UUIDs
 
 ##### Class diagram
 
-![Class diagram](Documentation/Class diagram.png)
+![Class diagram](Documentation/classdiagram.png)

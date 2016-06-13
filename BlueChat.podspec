@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BlueChat"
-  s.version      = "0.0.2"
-  s.summary      = "1-to-1 Chat over Bluetooth LE."
+  s.version      = "0.0.3"
+  s.summary      = "1-to-1 Chat over Bluetooth LE"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,11 +25,16 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-	   				1-to-1 Chat over Bluetooth LE demonstrating CoreBluetooth
+	   				1-to-1 Chat over Bluetooth LE demonstrating CoreBluetooth APIs on both Central and Peripheral sides.
                    DESC
 
   s.homepage     = "https://github.com/zouchaoqun/BlueChat"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  s.screenshots  = "https://github.com/zouchaoqun/BlueChat/raw/master/Documentation/screens/screen0.png", 
+  "https://github.com/zouchaoqun/BlueChat/raw/master/Documentation/screens/screen1.png", 
+  "https://github.com/zouchaoqun/BlueChat/raw/master/Documentation/screens/screen2.png",
+  "https://github.com/zouchaoqun/BlueChat/raw/master/Documentation/screens/screen3.png", 
+  "https://github.com/zouchaoqun/BlueChat/raw/master/Documentation/screens/screen4.png", 
+  "https://github.com/zouchaoqun/BlueChat/raw/master/Documentation/screens/screen5.png" 
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
