@@ -1,5 +1,5 @@
 # BlueChat
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/BlueChat.svg)](https://cocoapods.org/pods/MBProgressHUD) 
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/BlueChat.svg)](https://cocoapods.org/pods/BlueChat) 
 [![License: MIT](https://img.shields.io/cocoapods/l/BlueChat.svg)](http://opensource.org/licenses/MIT)
 [![CocoaDocs Compatible](https://img.shields.io/cocoapods/metrics/doc-percent/BlueChat.svg)](http://cocoadocs.org/docsets/BlueChat/)
 
